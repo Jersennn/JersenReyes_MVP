@@ -7,7 +7,6 @@ dotenv.config();
 //connect to database
 const sql = postgres({database: "weightTrack"});
 
-
 const app = express();
 app.use(express.json());
 app.use(express.static("./client"));
