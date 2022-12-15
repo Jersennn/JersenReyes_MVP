@@ -3,17 +3,17 @@ import postgres from "postgres";
 
 
 //connect to database
-const sql = postgres("postgres://weight_track_user:aGOg96xlsbxWMwnD4FNRwsyPR3nFjvJb@dpg-cednu8qrrk0fole53rn0-a.oregon-postgres.render.com/weight_track?sll=true");
+const sql = postgres("postgres://weight_track_user:aGOg96xlsbxWMwnD4FNRwsyPR3nFjvJb@dpg-cednu8qrrk0fole53rn0-a.oregon-postgres.render.com/weight_track?ssl=true")
 
 const app = express();
 app.use(express.json());
 app.use(express.static("./client"));
 
 //using a get requst to get all
-app.get("/users", (req, res) => {
+app.get("/users", (req, res, next) => {
     sql`SELECT * FROM users`.then((result) => {
         res.json(result);
-    });
+    }).catch(next);
 });
 
 //using a get request to get a specific person
@@ -76,6 +76,11 @@ app.delete("/users/:id", (req, res) => {
     });
 });
 
+//handle errors
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).send("Internal server error");
+});
 
 app.listen(3000);
 console.log("listening on port 3000");
