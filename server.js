@@ -11,16 +11,16 @@ app.use(express.json());
 app.use(express.static("./client"));
 
 //using a get requst to get all
-app.get("/users", (req, res, next) => {
-    sql`SELECT * FROM users`.then((result) => {
+app.get("/saiyan", (req, res, next) => {
+    sql`SELECT * FROM saiyan`.then((result) => {
         res.json(result);
     }).catch(next);
 });
 
 //using a get request to get a specific person
-app.get("/users/:id", (req, res, next) => {
+app.get("/saiyan/:id", (req, res, next) => {
     const id = req.params.id;
-    sql`SELECT * FROM users WHERE id = ${id}`.then((result) => {
+    sql`SELECT * FROM saiyan WHERE id = ${id}`.then((result) => {
         if (result.length === 0) {
             res.set("Content-type", "text/plain");
             res.status(404);
@@ -32,36 +32,36 @@ app.get("/users/:id", (req, res, next) => {
 });
 
 //using a post request to put new information
-app.post("/users", (req, res) => {
+app.post("/saiyan", (req, res) => {
     const user = req.body
-    const { username, weight } = user;
-    const reqfields = ["username", "weight"];
+    const { username, power_level } = user;
+    const reqfields = ["username", "power_level"];
     const error = [];
     for (let field of reqfields) {
         if (user[field] === undefined) {
             error.push(`Missing ${field} value`);
         }
     }
-    if (weight && typeof weight !== "number") {
-        error.push("Weight must be a number");
+    if (power_level && typeof power_level !== "number") {
+        error.push("power level must be a number");
     }
     if (error.length > 0) {
         res.status(422);
         res.send(error.join(" "));
     } else {
-        sql`INSERT INTO users (username, weight)VALUES(${username}, ${weight}) RETURNING *`.then((result) => {
+        sql`INSERT INTO saiyan (username, power_level)VALUES(${username}, ${power_level}) RETURNING *`.then((result) => {
             res.json(result[0]);
         })
     }
 })
 
 // using a patch request
-app.patch("/users/:id", (req, res) => {
+app.patch("/saiyan/:id", (req, res) => {
     const id = req.params.id;
     const user = req.body;
-    const { username, weight } = id;
+    const { username, power_level } = id;
     sql`
-    UPDATE users
+    UPDATE saiyan
     SET ${sql(req.body)}
     WHERE id = ${id} RETURNING *
     `.then((result) => {
@@ -70,9 +70,9 @@ app.patch("/users/:id", (req, res) => {
 });
 
 //using a delete request
-app.delete("/users/:id", (req, res) => {
+app.delete("/saiyan/:id", (req, res) => {
     const { id } = req.params;
-    sql`DELETE FROM users WHERE id = ${id} RETURNING *`.then((result) => {
+    sql`DELETE FROM saiyan WHERE id = ${id} RETURNING *`.then((result) => {
         res.send(result[0]);
     });
 });

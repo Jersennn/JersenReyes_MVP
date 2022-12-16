@@ -1,14 +1,17 @@
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS saiyan;
 
-CREATE TABLE users(
+CREATE TABLE saiyan (
     id SERIAL,
     username TEXT,
-    weight INTEGER
+    power_level INTEGER
 );
 
 
 
-INSERT INTO users(username, weight)VALUES('Jersen', 170);
-INSERT INTO users(username, weight)VALUES('Andy', 164);
-INSERT INTO users(username, weight)VALUES('Jerome', 186);
-INSERT INTO users(username, weight)VALUES('Ben', 151);
+INSERT INTO saiyan(username, power_level)VALUES('Goku', 10000);
+INSERT INTO saiyan(username, power_level)VALUES('Vegeta', 9999);
+INSERT INTO saiyan(username, power_level)VALUES('Beerus', 20000);
+INSERT INTO saiyan(username, power_level)VALUES('Omni-King', 999999999);
+INSERT INTO saiyan(username, power_level)VALUES('Gohan', 9000);
+INSERT INTO saiyan(username, power_level)VALUES('Trunks', 8950);
+INSERT INTO saiyan(username, power_level)VALUES('Piccolo', 8950);
