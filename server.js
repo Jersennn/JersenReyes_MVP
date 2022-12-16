@@ -1,10 +1,11 @@
 import express from "express";
 import postgres from "postgres";
+import dotenv from "dotenv";
 
+dotenv.config();
 
 //connect to database
-const sql = postgres("postgres://weight_track_user:aGOg96xlsbxWMwnD4FNRwsyPR3nFjvJb@dpg-cednu8qrrk0fole53rn0-a.oregon-postgres.render.com/weight_track?ssl=true")
-
+const sql = postgres(process.env.DATABASE_URL);
 const app = express();
 app.use(express.json());
 app.use(express.static("./client"));
