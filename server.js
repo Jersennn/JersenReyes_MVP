@@ -12,7 +12,7 @@ app.use(express.static("./client"));
 
 //using a get requst to get all
 app.get("/saiyan", (req, res, next) => {
-    sql`SELECT * FROM saiyan`.then((result) => {
+    sql`SELECT * FROM saiyan ORDER BY power_level DESC`.then((result) => {
         res.json(result);
     }).catch(next);
 });
@@ -33,7 +33,7 @@ app.get("/saiyan/:id", (req, res, next) => {
 
 //using a post request to put new information
 app.post("/saiyan", (req, res) => {
-    const user = req.body
+    const user = req.body;
     const { username, power_level } = user;
     const reqfields = ["username", "power_level"];
     const error = [];
@@ -76,6 +76,7 @@ app.delete("/saiyan/:id", (req, res) => {
         res.send(result[0]);
     });
 });
+
 
 //handle errors
 app.use((err, req, res, next) => {
