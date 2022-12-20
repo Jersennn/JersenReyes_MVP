@@ -10,6 +10,7 @@ body {
     background-size:cover;
     background-position: center;
     background-position-y:top;
+    position: relative;
 }
 
 .allBtn{
@@ -20,25 +21,36 @@ body {
     font-weight: bold;
 }
 
-.slide {
+/* .slide {
     float:right;
+} */
+
+.fightwrap {
+    float: right;
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+    position:absolute;
+    top:80px;
+    right:0px;
 }
 
-.fight {
+/* .fight {
     float: right;
 }
 
 .vegeta {
-    float:none;
+    float:right;
     text-align: right;
-}
+} */
 
 .all{
     position:inherit;
     font-size: 20px;
     font-weight: bold;
     border: 2px solid black;
-    width: 450px;
+    max-width: 450px;
+    margin:0px;
     background-image: url("https://media.tenor.com/WuDX7u6Y_GgAAAAC/anime-sragon-ball-super.gif");
     background-repeat: no-repeat;
 }
