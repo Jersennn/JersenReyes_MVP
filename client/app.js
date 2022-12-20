@@ -2,6 +2,7 @@
 const allSaiyan = document.querySelector(".all");
 const allBtn = document.querySelector(".allBtn");
 const create = document.querySelector(".createSaiyan");
+const deleter = document.querySelector(".delete");
 
 allBtn.addEventListener("click", () => {
     allSaiyan.innerText = "";
@@ -30,3 +31,13 @@ create.addEventListener("submit", (event) => {
         body: JSON.stringify(newSaiyan),
     });
 });
+
+deleter.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const result = new FormData(event.target);
+    const erase = { username: result.get("username") };
+    console.log(erase.username);
+    fetch(`/saiyan/${erase.username}`, {
+        method: "DELETE",
+    })
+})

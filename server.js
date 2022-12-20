@@ -70,9 +70,9 @@ app.patch("/saiyan/:id", (req, res) => {
 });
 
 //using a delete request
-app.delete("/saiyan/:id", (req, res) => {
-    const { id } = req.params;
-    sql`DELETE FROM saiyan WHERE id = ${id} RETURNING *`.then((result) => {
+app.delete("/saiyan/:username", (req, res) => {
+    const { username } = req.params;
+    sql`DELETE FROM saiyan WHERE username = ${username} RETURNING *`.then((result) => {
         res.send(result[0]);
     });
 });
